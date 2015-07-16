@@ -32,3 +32,96 @@ var gJspw3Obj="",gJspw3nm=0;function massage(wi,hi,g,t,l,n,v,b,clo){wi-=0;if(t !
 
 function jspw3(d,m,f){ //v1.4
 	f=f.split(',');var b=f[15],u=f[17],c=f[0],sl="_v_w_d_";var hr="jspw3_pop.htm?"+eval('escape(m.replace(/\\//g,sl))');var ret=massage(f[10],f[11],f[12],f[13],f[14],f[1],String(f[2]),b,f[6]);if(ret!=''){hr+=","+ret[0]+","+c+","+escape(f[1])+","+f[2]+","+escape(f[3])+","+escape(f[4])+","+f[6]+","+f[7]+","+f[8]+","+f[9]+","+ret[4]+","+ret[5]+","+f[16]+","+f[19]+","+eval('d.replace(/\\//g,sl)')+","+escape(f[5]);b=(b)?"yes":"no";var features="resizable=yes,scrollbars="+b+",width="+ret[0]+",height="+ret[1]+",top="+ret[2]+",left="+ret[3];if(u&&!c){window.open(hr,gJspw3nm++,features);}else{if(gJspw3Obj && typeof gJspw3Obj=='object' && !gJspw3Obj.closed)gJspw3Obj.close();gJspw3Obj=window.open(hr,gJspw3nm++,features);}}else window.open(m);document.MM_returnValue=(f[18]==3);}
+
+
+
+
+  //###################################################################
+  // Author: Ryan Gardner
+  // Version: v1.0
+  // Date: 2015-03-01
+  // Description: displays the amount of time until the "dateFuture" entered below.
+
+  var CDown = function() {
+  this.state=0;// if initialized
+  this.counts=[];// array holding countdown date objects and id to print to {d:new Date(2013,11,18,18,54,36), id:"countbox1"}
+  this.interval=null;// setInterval object
+  }
+
+  CDown.prototype = {
+  init: function(){
+    this.state=1;
+    var self=this;
+    this.interval=window.setInterval(function(){self.tick();}, 25);
+  },
+  add: function(date,id){
+    this.counts.push({d:date,id:id});
+    this.tick();
+    if(this.state==0) this.init();
+  },
+  expire: function(idxs){
+    for(var x in idxs) {
+      this.display(this.counts[idxs[x]], "NOW!");
+      this.counts.splice(idxs[x], 1);
+    }
+  },
+  format: function(r){
+    var out="";
+    out += r.d +" "+((r.d==1)?"day":"days")+", ";
+    out += r.h +" "+((r.h==1)?"hour":"hours")+", ";
+    out += r.m +" "+((r.m==1)?"min":"mins")+", ";
+    out += r.s +("."+r.ms)+" "+((r.s==1)?"sec":"secs")+", ";
+
+    return out.substr(0,out.length-2);
+  },
+  math: function(work){
+    var	y=w=d=h=m=s=ms=0;
+
+    ms=(""+((work%1000)+1000)).substr(1,3);
+    work=Math.floor(work/1000);//kill the "milliseconds" so just secs
+
+    y=Math.floor(work/31536000);//years (no leapyear support)
+    w=Math.floor(work/604800);//weeks
+    d=Math.floor(work/86400);//days
+    work=work%86400;
+
+    h=Math.floor(work/3600);//hours
+    work=work%3600;
+
+    m=Math.floor(work/60);//minutes
+    work=work%60;
+
+    s=Math.floor(work);//seconds
+
+    return {y:y,w:w,d:d,h:h,m:m,s:s,ms:ms};
+  },
+  tick: function(){
+    var now=(new Date()).getTime(),
+      expired=[],cnt=0,amount=0;
+
+    if(this.counts)
+    for(var idx=0,n=this.counts.length; idx<n; ++idx){
+      cnt=this.counts[idx];
+      amount=cnt.d.getTime()-now;//calc milliseconds between dates
+
+      // if time is already past
+      if(amount<0){
+        expired.push(idx);
+      }
+      // date is still good
+      else{
+        this.display(cnt, this.format(this.math(amount)));
+      }
+    }
+
+    // deal with any expired
+    if(expired.length>0) this.expire(expired);
+
+    // if no active counts, stop updating
+    if(this.counts.length==0) window.clearTimeout(this.interval);
+
+  },
+  display: function(cnt,msg){
+    document.getElementById(cnt.id).innerHTML="Spook Hollow 2015 season starts in " +msg;
+  }
+  };
