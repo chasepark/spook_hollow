@@ -1,4 +1,5 @@
 @charset "utf-8";
+/*
 body  {
 	font: 100% Arial, Helvetica, Verdana, sans-serif;
 	background: #000 url(../images/back.jpg) no-repeat scroll top center;
@@ -6,6 +7,15 @@ body  {
 	padding: 0;
 	text-align: center;
 	color: #FFF;
+}
+*/
+#wrapper{
+	background: #000 url(../images/back.jpg) no-repeat scroll top center;
+	///background-size: cover !important;
+	border: 1px solid red;
+	height: 100%;
+	margin: 0px auto;
+	/*overflow: hidden;*/ //Crop In Small Browsers
 }
 #container {
 	width: 1000px;
@@ -116,4 +126,44 @@ img {
 .social {
 	text-align:center;
 	margin:20px 0;
+}
+
+// Chases Work
+body  {
+	height: 100%;
+	font: 100%  Arial, Helvetica, Verdana, sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	color: white;
+}
+a.nav-item{
+	font-family: 'Butcherman', cursive;
+	color: #FF0000;
+	font-weight: 400;
+	font-size: 3em;
+}
+a.nav-item:hover{
+	color: #FFCC33;
+	text-decoration: none;
+}
+.countdown{
+	font-family: 'Nosifer', cursive;
+	color: #FF0000;
+	font-size: 2em;
+}
+.navbar{
+	margin-bottom: 0px;
+}
+.navbar-brand{
+	font-family: 'Butcherman', cursive;
+}
+.main-content{
+	margin-top: 60px;
+}
+.header{
+	margin-top: 40px;
+}
+.background-image{
+		z-index:9999;
 }

@@ -122,6 +122,6 @@ function jspw3(d,m,f){ //v1.4
 
   },
   display: function(cnt,msg){
-    document.getElementById(cnt.id).innerHTML="Spook Hollow 2015 season starts in " +msg;
+    document.getElementById(cnt.id).innerHTML="Spook Hollow 2015 season starts in:<br/> " +msg;
   }
   };

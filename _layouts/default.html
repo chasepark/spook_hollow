@@ -4,13 +4,24 @@
   {% include head.html %}
 
   <body>
+    {% include mobile_nav.html %}
     {% include google_tag_manager.html %}
-    <div id="container">
+    {% include footer_scripts.html %}
+    <div id="wrapper">
       {% include header.html %}
-      {% include sidebar.html %}
-      {% include footer_scripts.html %}
-      {{ content }}
+      <div class="container main-content">
+        <div class="row">
+          <div class="col-md-9 col-lg-push-1 col-lg-8">
+            {{ content }}
+          </div>
+          <div class="col-md-3">
+            {% include sidebar.html %}
+          </div>
+        </div>
+
+
       {% include footer.html %}
+    </div>
     </div>
 
   </body>
