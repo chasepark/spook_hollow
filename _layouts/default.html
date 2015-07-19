@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+    {% include google_tag_manager.html %}
+    <div id="container">
+      {% include header.html %}
+      {% include sidebar.html %}
+      {% include footer_scripts.html %}
+      {{ content }}
+      {% include footer.html %}
+    </div>
+
+  </body>
+
+</html>
